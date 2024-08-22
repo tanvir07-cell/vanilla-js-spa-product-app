@@ -11,7 +11,7 @@ export class ProductsPage extends HTMLElement {
     this.root.appendChild(style);
 
     async function loadCSS() {
-      const css = await fetch("./components/ProductsPage.css");
+      const css = await fetch("components/ProductsPage.css");
       style.textContent = await css.text();
     }
     loadCSS();
