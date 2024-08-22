@@ -8,6 +8,8 @@ export class ProductsPage extends HTMLElement {
 
     // for style:
     const style = document.createElement("style");
+    style.setAttribute("type", "text/css");
+
     this.root.appendChild(style);
 
     async function loadCSS() {
