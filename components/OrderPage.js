@@ -88,10 +88,6 @@ export class OrderPage extends HTMLElement {
           e.preventDefault();
           const productId = e.currentTarget.getAttribute("data-id");
           removeFromCart(productId);
-          app.state.cart = app.state.cart.filter(
-            (item) => item.product.id !== productId
-          );
-          globalThis.dispatchEvent(new Event("app:cart-updated"));
         });
 
         orderList.appendChild(orderItem); // Append each unique item to the list
