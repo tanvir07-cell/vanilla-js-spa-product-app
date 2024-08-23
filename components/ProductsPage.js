@@ -1,3 +1,5 @@
+import { addToCart } from "../utils/addToCart.js";
+
 export class ProductsPage extends HTMLElement {
   constructor() {
     super();
@@ -44,6 +46,11 @@ export class ProductsPage extends HTMLElement {
       products.forEach((product) => {
         const productItem = document.createElement("li");
         productItem.innerHTML = `
+        <div class = "product"
+        
+        onClick="app.router.navigate('/details-${product.id}')"
+
+        >
             <img
             src=${product.image}
 
@@ -55,7 +62,19 @@ export class ProductsPage extends HTMLElement {
             <button data-id="${
               product.id
             }" class="dark-blue-mesh glass">Add to cart</button>
+          </div>
+
             `;
+        // Prevent button click from triggering the parent div's onClick event
+        const button = productItem.querySelector("button");
+        button.addEventListener("click", async (event) => {
+          event.stopPropagation();
+          const productId = event.currentTarget.dataset.id;
+
+          // add to cart:
+          await addToCart(productId);
+        });
+
         productsList.appendChild(productItem);
       });
     }

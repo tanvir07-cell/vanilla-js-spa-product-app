@@ -32,6 +32,22 @@ body > header > nav > a {
   transition: color 0.3s ease;
 }
 
+#linkOrder {
+  position: relative;
+}
+
+#badge {
+  padding: 2px;
+  border-radius: 2rem;
+  width: 2rem;
+  text-align: center;
+  font-size: x-small;
+  color: white;
+  position: absolute;
+  right: -5px;
+  top: -17px;
+}
+
 main {
   max-width: 1200px;
   margin: 4rem auto;

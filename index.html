@@ -31,20 +31,30 @@
           home
         </a>
 
+        <a class="navlink material-symbols-outlined" id="linkHome" href="/">
+          vanilla_Products
+        </a>
+
         <a
           class="navlink material-symbols-outlined"
           id="linkOrder"
           href="/order"
         >
           shopping_cart
+          <span id="badge" class="glass dark-blue-mesh" hidden></span>
         </a>
-        <span id="badge" hidden></span>
       </nav>
     </header>
     <main></main>
     <template id="products-page-template">
       <section id="products-section">
         <ul id="products"></ul>
+      </section>
+    </template>
+
+    <template id="details-page-template">
+      <section id="details-section">
+        <div id="details"></div>
       </section>
     </template>
   </body>

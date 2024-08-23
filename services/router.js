@@ -34,6 +34,14 @@ const router = {
     if (path === "/order") {
       main.innerHTML = `<h2>Order</h2>`;
     }
+
+    if (path.startsWith("/details-")) {
+      const id = path.split("-")[1];
+      const detailsPage = document.createElement("details-page");
+      detailsPage.dataset.id = id;
+      main.innerHTML = "";
+      main.appendChild(detailsPage);
+    }
   },
 };
 
