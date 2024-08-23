@@ -16,14 +16,28 @@ globalThis.app = {
 };
 
 globalThis.addEventListener("DOMContentLoaded", () => {
+  // Load the cart from localStorage
+  // and save it to the global app state
+  // so that it can be accessed from anywhere
+  const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+  app.state.cart = savedCart;
+
+  // Update the cart badge on initial load
+  updateCartBadge();
+
   // load the routes:
   app.router.init();
   loadProducts();
 });
 
-globalThis.addEventListener("app:cart-updated", (e) => {
+function updateCartBadge() {
   const badge = document.querySelector("#badge");
   const qty = app.state.cart.reduce((acc, item) => acc + item.quantity, 0);
   badge.textContent = qty;
   badge.hidden = qty === 0;
+}
+
+// Update the badge when the cart is updated
+globalThis.addEventListener("app:cart-updated", () => {
+  updateCartBadge();
 });

@@ -73,6 +73,8 @@ export class ProductsPage extends HTMLElement {
 
           // add to cart:
           await addToCart(productId);
+
+          localStorage.setItem("cart", JSON.stringify(app.state.cart));
         });
 
         productsList.appendChild(productItem);

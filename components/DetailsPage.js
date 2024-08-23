@@ -55,6 +55,7 @@ export class DetailsPage extends HTMLElement {
         const btn = detailsDiv.querySelector("button");
         btn.addEventListener("click", async (e) => {
           await addToCart(product.id);
+          localStorage.setItem("cart", JSON.stringify(app.state.cart));
 
           setTimeout(() => {
             app.router.navigate("/order");

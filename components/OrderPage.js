@@ -109,6 +109,7 @@ export class OrderPage extends HTMLElement {
   setFormBindings(form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+
       if (app.state.cart.length === 0) {
         this.showModal("Place some order before submitting.");
         this.#user.name = "";
@@ -123,6 +124,9 @@ export class OrderPage extends HTMLElement {
 
         // clear the cart and call the cart proxy
         app.state.cart = [];
+
+        // clear the localstorage:
+        localStorage.setItem("cart", JSON.stringify(app.state.cart));
       }
     });
 
