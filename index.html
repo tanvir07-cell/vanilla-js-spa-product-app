@@ -28,7 +28,14 @@
       as="stylesheet"
       type="text/css"
     />
-    <title>Movie Api</title>
+
+    <link
+      rel="preload"
+      href="components/OrderPage.css"
+      as="stylesheet"
+      type="text/css"
+    />
+    <title>Vanilla Products</title>
     <script src="app.js" type="module" defer></script>
   </head>
   <body>
@@ -66,12 +73,42 @@
     </template>
 
     <template id="order-page-template">
-      <h1>Order page</h1>
       <section id="order-section">
         <ul id="order-list" class="light-blue-mesh glass"></ul>
         <p id="total"></p>
+
+        <h2 style="text-align: center">Order</h2>
+
+        <form class="dark-blue-mesh glass">
+          <div>
+            <label id="name" for="name">Your Name</label>
+            <input name="name" id="name" required />
+          </div>
+
+          <div>
+            <label for="phone">Your Phone Number</label>
+            <input name="phone" type="tel" />
+          </div>
+
+          <div>
+            <label for="email">Your Email</label>
+            <input name="email" type="email" />
+          </div>
+
+          <button type="submit" class="light-blue-mesh glass">
+            Place Order
+          </button>
+        </form>
         <!-- <button id="order-button" class="dark-blue-mesh glass">Order</button> -->
       </section>
+
+      <div id="modal" class="modal hidden">
+        <div class="modal-content glass dark-blue-mesh">
+          <span class="close-btn">&times;</span>
+          <p id="modal-message"></p>
+          <button id="modal-ok-btn" class="dark-blue-mesh glass">OK</button>
+        </div>
+      </div>
     </template>
   </body>
 </html>

@@ -23,6 +23,8 @@ export class OrderPage extends HTMLElement {
     const content = template.content.cloneNode(true);
     this.root.appendChild(content);
 
+    this.bindModalEvents();
+
     this.render();
 
     globalThis.addEventListener("app:cart-updated", () => {
@@ -31,6 +33,8 @@ export class OrderPage extends HTMLElement {
   }
 
   render() {
+    this.setFormBindings(this.root.querySelector("form"));
+
     const cart = app.state.cart;
     const orderList = this.root.querySelector("#order-list");
 
@@ -75,11 +79,11 @@ export class OrderPage extends HTMLElement {
         deleteButton.addEventListener("click", async (e) => {
           e.preventDefault();
           const productId = e.currentTarget.getAttribute("data-id");
-          await removeFromCart(productId);
+          removeFromCart(productId);
           app.state.cart = app.state.cart.filter(
             (item) => item.product.id !== productId
           );
-          globalThis.dispatchEvent(new Event("app:cart-updated")); // Notify cart update
+          globalThis.dispatchEvent(new Event("app:cart-updated"));
         });
 
         orderList.appendChild(orderItem); // Append each unique item to the list
@@ -92,6 +96,58 @@ export class OrderPage extends HTMLElement {
     );
     const totalDiv = this.root.querySelector("#total");
     totalDiv.textContent = `Total: $${total.toFixed(2)}`;
+  }
+
+  setFormBindings(form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (app.state.cart.length === 0) {
+        this.showModal("Place some order before submitting.");
+        form.reset();
+        return;
+      }
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      console.log(data);
+      // Send the data to the server
+      const response = await fetch("http://localhost:3000/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        this.showModal("Order placed successfully!");
+        app.state.cart = [];
+        form.reset();
+        // app.router.navigate("/");
+      } else {
+        alert("Failed to place order");
+      }
+    });
+  }
+
+  bindModalEvents() {
+    const modal = this.root.querySelector("#modal");
+    const closeModal = this.root.querySelector(".close-btn");
+    const okButton = this.root.querySelector("#modal-ok-btn");
+
+    closeModal.addEventListener("click", () => {
+      modal.classList.add("hidden");
+    });
+
+    okButton.addEventListener("click", () => {
+      modal.classList.add("hidden");
+    });
+  }
+
+  showModal(message) {
+    const modal = this.root.querySelector("#modal");
+    const modalMessage = this.root.querySelector("#modal-message");
+
+    modalMessage.textContent = message;
+    modal.classList.remove("hidden");
   }
 }
 

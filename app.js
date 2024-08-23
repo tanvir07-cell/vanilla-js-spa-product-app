@@ -22,7 +22,6 @@ globalThis.addEventListener("DOMContentLoaded", () => {
 });
 
 globalThis.addEventListener("app:cart-updated", (e) => {
-  console.log(e);
   const badge = document.querySelector("#badge");
   const qty = app.state.cart.reduce((acc, item) => acc + item.quantity, 0);
   badge.textContent = qty;

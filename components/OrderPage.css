@@ -80,3 +80,86 @@ a {
   padding: 20px; /* Added padding for a more spacious feel */
   transition: backdrop-filter 0.3s ease, box-shadow 0.3s ease;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  width: 50%;
+  border-radius: 10px;
+  gap: 2rem;
+}
+
+label,
+input {
+  display: block;
+  width: 100%;
+  margin-left: 5%;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  background-color: rgba(255, 255, 255, 0.15);
+  margin-bottom: 6px;
+  font-size: large;
+  border: 1px solid var(--color3);
+  border-radius: 15px;
+  padding: 0.5rem;
+}
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-content {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.modal-content p {
+  text-shadow: 4px 4px 4px #aaa;
+  letter-spacing: 0.2rem;
+  font-size: 1.5rem;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+#modal-ok-btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#modal-ok-btn:hover {
+  background-color: #0056b3;
+}
