@@ -1,6 +1,13 @@
 import { removeFromCart } from "../utils/removeProductById.js";
 
 export class OrderPage extends HTMLElement {
+  // private property
+  #user = {
+    name: "",
+    phone: "",
+    email: "",
+  };
+
   constructor() {
     super();
 
@@ -23,6 +30,7 @@ export class OrderPage extends HTMLElement {
     const content = template.content.cloneNode(true);
     this.root.appendChild(content);
 
+    // Set up the model binding.
     this.bindModalEvents();
 
     this.render();
@@ -103,28 +111,35 @@ export class OrderPage extends HTMLElement {
       e.preventDefault();
       if (app.state.cart.length === 0) {
         this.showModal("Place some order before submitting.");
-        form.reset();
+        this.#user.name = "";
+        this.#user.email = "";
+        this.#user.phone = "";
         return;
-      }
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
-      console.log(data);
-      // Send the data to the server
-      const response = await fetch("http://localhost:3000/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      if (response.ok) {
-        this.showModal("Order placed successfully!");
-        app.state.cart = [];
-        form.reset();
-        // app.router.navigate("/");
       } else {
-        alert("Failed to place order");
+        this.showModal("Order submitted successfully.");
+        this.#user.name = "";
+        this.#user.email = "";
+        this.#user.phone = "";
+
+        // clear the cart and call the cart proxy
+        app.state.cart = [];
       }
+    });
+
+    Array.from(form.elements).forEach((element) => {
+      if (element.name) {
+        element.addEventListener("change", (event) => {
+          // call the set proxy
+          this.#user[element.name] = element.value;
+        });
+      }
+    });
+    this.#user = new Proxy(this.#user, {
+      set(target, property, value) {
+        target[property] = value;
+        form.elements[property].value = value;
+        return true;
+      },
     });
   }
 
