@@ -54,12 +54,11 @@ export class DetailsPage extends HTMLElement {
 
         const btn = detailsDiv.querySelector("button");
         btn.addEventListener("click", async (e) => {
-          await addToCart(product.id); // Ensure addToCart completes
+          await addToCart(product.id);
 
-          // Wait a brief moment before navigating to allow for UI updates
           setTimeout(() => {
             app.router.navigate("/order");
-          }, 100); // 100ms delay
+          }, 100);
         });
       } else {
         detailsDiv.innerHTML = `<h2>Product not found</h2>`;

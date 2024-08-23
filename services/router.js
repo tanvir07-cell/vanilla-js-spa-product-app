@@ -32,7 +32,9 @@ const router = {
     }
 
     if (path === "/order") {
-      main.innerHTML = `<h2>Order</h2>`;
+      const orderPage = document.createElement("order-page");
+      main.innerHTML = "";
+      main.appendChild(orderPage);
     }
 
     if (path.startsWith("/details-")) {

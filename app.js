@@ -8,6 +8,7 @@ import { loadProducts } from "./utils/loadProducts.js";
 
 import { ProductsPage } from "./components/ProductsPage.js";
 import { DetailsPage } from "./components/DetailsPage.js";
+import { OrderPage } from "./components/OrderPage.js";
 
 globalThis.app = {
   state: STATE,
