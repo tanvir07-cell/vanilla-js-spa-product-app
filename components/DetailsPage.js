@@ -1,3 +1,4 @@
+import { saveDB } from "../services/idb.js";
 import { addToCart } from "../utils/addToCart.js";
 import getProductById from "../utils/getProductById.js";
 
@@ -55,7 +56,8 @@ export class DetailsPage extends HTMLElement {
         const btn = detailsDiv.querySelector("button");
         btn.addEventListener("click", async (e) => {
           await addToCart(product.id);
-          localStorage.setItem("cart", JSON.stringify(app.state.cart));
+
+          saveDB();
 
           setTimeout(() => {
             app.router.navigate("/order");

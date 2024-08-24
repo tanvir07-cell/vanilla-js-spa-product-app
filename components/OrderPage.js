@@ -1,3 +1,4 @@
+import { saveDB } from "../services/idb.js";
 import { removeFromCart } from "../utils/removeProductById.js";
 
 export class OrderPage extends HTMLElement {
@@ -106,27 +107,26 @@ export class OrderPage extends HTMLElement {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      if (app.state.cart.length === 0) {
-        this.showModal("Place some order before submitting.");
-        this.#user.name = "";
-        this.#user.email = "";
-        this.#user.phone = "";
-        return;
-      } else {
-        this.showModal("Order submitted successfully.");
-        this.#user.name = "";
-        this.#user.email = "";
-        this.#user.phone = "";
+      this.showModal("Order submitted successfully.");
+      this.#user.name = "";
+      this.#user.email = "";
+      this.#user.phone = "";
 
-        // clear the cart and call the cart proxy
-        app.state.cart = [];
+      // clear the cart and call the cart proxy
+      app.state.cart = [];
 
-        // clear the localstorage:
-        localStorage.setItem("cart", JSON.stringify(app.state.cart));
-      }
+      // clear the localstorage:
+      saveDB();
     });
 
     Array.from(form.elements).forEach((element) => {
+      if (element.type === "submit") {
+        if (app.state.cart.length === 0) {
+          element.disabled = true;
+          element.style.opacity = 0.5;
+          element.style.cursor = "not-allowed";
+        }
+      }
       if (element.name) {
         element.addEventListener("change", (event) => {
           // call the set proxy

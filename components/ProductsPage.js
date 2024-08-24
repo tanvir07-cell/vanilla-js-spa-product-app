@@ -1,3 +1,4 @@
+import { saveDB } from "../services/idb.js";
 import { addToCart } from "../utils/addToCart.js";
 
 export class ProductsPage extends HTMLElement {
@@ -74,7 +75,9 @@ export class ProductsPage extends HTMLElement {
           // add to cart:
           await addToCart(productId);
 
-          localStorage.setItem("cart", JSON.stringify(app.state.cart));
+          // localStorage.setItem("cart", JSON.stringify(app.state.cart));
+
+          saveDB();
         });
 
         productsList.appendChild(productItem);
