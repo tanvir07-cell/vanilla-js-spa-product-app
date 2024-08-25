@@ -53,7 +53,7 @@ export class ProductsPage extends HTMLElement {
 
         >
             <img
-            src=${product.image}
+            src=${product.thumbnail}
 
              
             />
