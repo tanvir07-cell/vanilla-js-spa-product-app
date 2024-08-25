@@ -2,14 +2,13 @@
 
 import router from "./services/router.js";
 import STATE from "./services/state.js";
-import { loadProducts } from "./utils/loadProducts.js";
 
 // for web components:
 
 import { ProductsPage } from "./components/ProductsPage.js";
 import { DetailsPage } from "./components/DetailsPage.js";
 import { OrderPage } from "./components/OrderPage.js";
-import { loadDB, openDB } from "./services/idb.js";
+import { loadDB, loadProductDB, openDB } from "./services/idb.js";
 
 globalThis.app = {
   state: STATE,
@@ -18,10 +17,10 @@ globalThis.app = {
 };
 
 globalThis.addEventListener("DOMContentLoaded", () => {
-  // Load the cart from localStorage
-  // and save it to the global app state
-  // so that it can be accessed from anywhere
-  // const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+  // load products from network and indexdb and store it to the app.state.products array
+  loadProductDB();
+
+  // load cart from the indexdb:
 
   loadDB();
 
@@ -30,9 +29,6 @@ globalThis.addEventListener("DOMContentLoaded", () => {
 
   // load the routes:
   app.router.init();
-
-  // load products and store it to the app.state.products array
-  loadProducts();
 });
 
 function updateCartBadge() {
