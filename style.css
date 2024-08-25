@@ -160,3 +160,9 @@ main {
     background-position: top, center;
   }
 }
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none;
+  }
+}
