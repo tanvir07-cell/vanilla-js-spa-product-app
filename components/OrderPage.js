@@ -72,7 +72,7 @@ export class OrderPage extends HTMLElement {
         orderItem.classList.add("glass");
         orderItem.classList.add("dark-blue-mesh");
         orderItem.innerHTML = `
-          <img src=${item.product.images[0]} />
+          <img src=${item.product.thumbnail} />
           <h2>${item.product.title.slice(0, 20).concat("...")}</h2>
           <p>$ ${item.product.price}</p>
           <p>Qty: ${item.quantity}x</p>

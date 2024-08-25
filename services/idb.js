@@ -58,4 +58,10 @@ export async function loadProductDB() {
       console.log("No data is available");
     }
   }
+
+  // Cache images
+  if (app.state.products.length > 0) {
+    const imageCache = await caches.open("vanilla-product-images");
+    app.state.products.forEach((c) => imageCache.add(new Request(c.thumbnail)));
+  }
 }

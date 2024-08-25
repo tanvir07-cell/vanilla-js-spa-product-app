@@ -3,6 +3,8 @@
 import router from "./services/router.js";
 import STATE from "./services/state.js";
 
+navigator.serviceWorker.register("/sw.js");
+
 // for web components:
 
 import { ProductsPage } from "./components/ProductsPage.js";
