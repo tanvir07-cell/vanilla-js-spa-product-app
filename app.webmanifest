@@ -5,5 +5,12 @@
   "name": "VANILLA PRODUCT PWA",
   "short_name": "VANILLA PWA",
   "display": "standalone",
-  "theme_color": "#0063d0"
+  "theme_color": "#0063d0",
+  "icons": [
+    {
+      "src": "./icon.webp",
+      "sizes": "1024x1024",
+      "type": "image/webp"
+    }
+  ]
 }
