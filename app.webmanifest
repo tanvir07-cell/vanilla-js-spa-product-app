@@ -1,0 +1,9 @@
+{
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "name": "VANILLA PRODUCT PWA",
+  "short_name": "VANILLA PWA",
+  "display": "standalone",
+  "theme_color": "#0063d0"
+}
