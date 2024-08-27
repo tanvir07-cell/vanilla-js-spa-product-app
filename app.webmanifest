@@ -2,11 +2,18 @@
   "id": "/",
   "start_url": "/",
   "scope": "/",
-  "name": "VANILLA PRODUCT PWA",
+  "name": "Here you can buy the best products",
   "short_name": "VANILLA PWA",
   "display": "standalone",
   "theme_color": "#0063d0",
   "icons": [
+    {
+      "src": "./maskable.png",
+      "sizes": "512/512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+
     {
       "src": "./icon.webp",
       "sizes": "1024x1024",
