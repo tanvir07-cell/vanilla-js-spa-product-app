@@ -29,17 +29,46 @@ self.addEventListener("install", async (event) => {
   cache.addAll(assets);
 });
 
-// for acceccisg the caching images
-self.addEventListener("fetch", async (event) => {
+// for acceccisg the caching cm-assets
+// network first strategy.
+// self.addEventListener("fetch", async (event) => {
+//   event.respondWith(
+//     (async () => {
+//       try {
+//         // network first strategy
+//         const fetchResponse = await fetch(event.request);
+//         return fetchResponse;
+//       } catch (e) {
+//         const cachedResponse = await caches.match(event.request);
+//         if (cachedResponse) return cachedResponse;
+//       }
+//     })()
+//   );
+// });
+
+// state while revalidating the cache
+
+// Fetch event to implement stale-while-revalidate strategy
+self.addEventListener("fetch", (event) => {
   event.respondWith(
     (async () => {
-      try {
-        const fetchResponse = await fetch(event.request);
-        return fetchResponse;
-      } catch (e) {
-        const cachedResponse = await caches.match(event.request);
-        if (cachedResponse) return cachedResponse;
-      }
+      const cache = await caches.open("cm-assets");
+
+      // from the cache;
+
+      const cachedResponse = await cache.match(event.request);
+
+      // Fetch the latest resource from the network
+      const fetchPromise = fetch(event.request)
+        .then((networkResponse) => {
+          // Update the cache with the latest version
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        })
+        .catch(() => cachedResponse); // In case of network failure, use cached response
+
+      // return cached immediately and update cache in the background
+      return cachedResponse || fetchPromise;
     })()
   );
 });
