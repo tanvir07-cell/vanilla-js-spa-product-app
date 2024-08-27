@@ -56,3 +56,9 @@ h2 {
   padding: 20px; /* Added padding for a more spacious feel */
   transition: backdrop-filter 0.3s ease, box-shadow 0.3s ease;
 }
+
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}

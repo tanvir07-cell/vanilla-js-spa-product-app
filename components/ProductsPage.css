@@ -29,6 +29,9 @@ img {
   height: auto;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
 }
 
 #products button {
