@@ -26,18 +26,30 @@ const router = {
     }
 
     if (path === "/") {
+      if (document.startViewTransition) {
+        document.startViewTransition();
+      }
       const productsPage = document.createElement("products-page");
+
       main.innerHTML = "";
       main.appendChild(productsPage);
     }
 
     if (path === "/order") {
+      if (document.startViewTransition) {
+        document.startViewTransition();
+      }
+
       const orderPage = document.createElement("order-page");
       main.innerHTML = "";
       main.appendChild(orderPage);
     }
 
     if (path.startsWith("/details-")) {
+      if (document.startViewTransition) {
+        document.startViewTransition();
+      }
+
       const id = path.split("-")[1];
       const detailsPage = document.createElement("details-page");
       detailsPage.dataset.id = id;
