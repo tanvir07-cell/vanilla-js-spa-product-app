@@ -36,6 +36,17 @@ body > header > nav > a {
   position: relative;
 }
 
+#downloadButton {
+  display: none; /* Hidden by default */
+  color: white;
+  background-color: #0063d0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 #badge {
   padding: 2px;
   border-radius: 2rem;
