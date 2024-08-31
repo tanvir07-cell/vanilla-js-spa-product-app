@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "name": "Tanvir Rifat",
+      "email": "tr9836859@gmail.com",
+      "password": "$2a$10$pAipt6naiLgMkDoMFuucruDYj/JG9wJD.Ur1ecQrkoFKPTfNIYExC",
+      "verified": true
+    },
+    {
+      "name": "Apple",
+      "email": "tanvirhassanrifat50@gmail.com",
+      "password": "$2a$10$EF4psSkYOi/i/7Px7aI4H.gNYiSv9JnaE2uZJCgokVoZIeJ67Ie9a",
+      "verified": true
+    }
+  ]
+}
