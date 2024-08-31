@@ -141,8 +141,7 @@ app.get("/auth/verify-email", async (req, res) => {
   const token = req.query.token;
 
   if (!token) {
-    res.status(400).send({ ok: false, message: "Invalid token" });
-    return;
+    return res.status(400).send({ ok: false, message: "Invalid token" });
   }
 
   try {
